@@ -10,7 +10,7 @@ const isPalindrome = (str) => {
 };
 isPalindrome('Лёша на полке клопа нашёл ');
 
-const searchingNumbers = (str) => {
+const searchNumbers = (str) => {
   const withoutSpaces = String(str).replaceAll(' ', '');
   let num = '';
   for (let i = 0; i < withoutSpaces.length; i++) {
@@ -20,7 +20,7 @@ const searchingNumbers = (str) => {
   }
   return num.length > 0 ? Number(num) : NaN;
 };
-searchingNumbers(-1.586);
+searchNumbers(-1.586);
 
 const formatString = (str, minLength, pattern) => {
 
