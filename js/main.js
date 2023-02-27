@@ -62,29 +62,30 @@ const uniqueNumbers = [];
 
 const getRandomNum = (min, max) => {
   if (min < 0 || max < 0) {
-    return 'Укажите положительный диапазон';
+    throw new Error('Укажите положительный диапазон');
   }
   if (min >= max) {
-    return 'Внимание: min должен быть меньше, чем max';
+    throw new Error('Внимание: min должен быть меньше, чем max');
   }
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-getRandomNum(-2, 4);
+
 
 const getRandomNumberUnique = (min, max) => {
   const swap = getRandomNum(min, max);
   if (!uniqueNumbers.includes(swap)) {
     uniqueNumbers.push(swap);
     return swap;
-  } if (max - min < uniqueNumbers.length) {
-    return 'Массив переполнен!';
+  }
+  if (max - min < uniqueNumbers.length) {
+    throw new Error('Массив переполнен!');
   }
 };
-getRandomNumberUnique(2, 5);
 
-const createComment = (numberOfComment) => {
+
+const createComments = (numberOfComment) => {
   const arr = [];
   for (let i = 1; i <= numberOfComment; i++) {
     const comment = {
@@ -98,7 +99,7 @@ const createComment = (numberOfComment) => {
   return arr;
 };
 
-const createPhoto = (numberOfPhotos) => {
+const createPhotos = (numberOfPhotos) => {
   const arr = [];
   for (let i = 1; i <= numberOfPhotos; i++) {
     const photo = {
@@ -106,10 +107,11 @@ const createPhoto = (numberOfPhotos) => {
       url : `photos/${i}.jpg`,
       description : `${descriptionsList[i]}`,
       likes : `${getRandomNum(15, 200)}`,
-      commens : createComment(2),
+      commens : createComments(2),
     };
     arr.push(photo);
   }
   return arr;
 };
-createPhoto(25);
+createPhotos(25);
+
