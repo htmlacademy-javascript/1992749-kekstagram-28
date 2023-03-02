@@ -58,8 +58,6 @@ const namesList = ['Tyrion Lannister',
   'Tormund Giantdeath',
 ];
 
-const uniqueNumbers = [];
-
 const getRandomNum = (min, max) => {
   if (min < 0 || max < 0) {
     throw new Error('Укажите положительный диапазон');
@@ -74,14 +72,20 @@ const getRandomNum = (min, max) => {
 
 
 const getRandomNumberUnique = (min, max) => {
-  const swap = getRandomNum(min, max);
-  if (!uniqueNumbers.includes(swap)) {
+  const uniqueNumbers = [];
+
+  return function () {
+    let swap = getRandomNum(min, max);
+
+    if (uniqueNumbers.length > max - min) {
+      throw new Error('Массив переполнен!');
+    }
+    while (uniqueNumbers.includes(swap)) {
+      swap = getRandomNum(min, max);
+    }
     uniqueNumbers.push(swap);
     return swap;
-  }
-  if (max - min < uniqueNumbers.length) {
-    throw new Error('Массив переполнен!');
-  }
+  };
 };
 
 
