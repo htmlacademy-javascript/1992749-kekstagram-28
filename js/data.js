@@ -1,4 +1,4 @@
-import {getRandomNum, getRandomNumberUnique} from './util.js';
+import {getRandomNum, getRandomNumberUnique} from './utils.js';
 
 const descriptionsList = [
   'zero',
@@ -88,5 +88,4 @@ const createPhotos = (numberOfPhotos) => {
   }
   return arr;
 };
-createPhotos(25);
-
+export {createPhotos};
