@@ -60,11 +60,13 @@ const namesList = ['Tyrion Lannister',
   'Tormund Giantdeath',
 ];
 
+const uniqueIdentifiers = getRandomNumberUnique(400, 900);
+
 const createComments = (numberOfComment) => {
   const arr = [];
   for (let i = 1; i <= numberOfComment; i++) {
     const comment = {
-      id: `${getRandomNumberUnique(40, 900)}`,
+      id: `${uniqueIdentifiers()}`,
       avatar: `img/avatar-${getRandomNum(1, 6)}.svg`,
       message: `${messagesList[getRandomNum(0, 5)]}`,
       name: `${namesList[getRandomNum(0, 19)]}`,
