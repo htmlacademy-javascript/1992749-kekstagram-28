@@ -76,7 +76,7 @@ const createComments = (numberOfComment) => {
   return arr;
 };
 
-const createPhotos = (numberOfPhotos) => {
+export const createPhotos = (numberOfPhotos) => {
   const arr = [];
   for (let i = 1; i <= numberOfPhotos; i++) {
     const photo = {
@@ -90,4 +90,4 @@ const createPhotos = (numberOfPhotos) => {
   }
   return arr;
 };
-export {createPhotos};
+

@@ -1,2 +1,3 @@
-import {createPhotos} from './data.js';
-createPhotos(25);
+import {createImagesUsers} from './pictures.js';
+
+createImagesUsers();
