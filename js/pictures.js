@@ -1,13 +1,13 @@
-import {createPhotos} from './data.js';
+
 
 const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 const template = document.querySelector('#picture').content.querySelector('a');
-const generatePohotos = createPhotos(25);
 
-export const createImagesUsers = () => {
 
-  generatePohotos.forEach((item) => {
+export const createUsersImages = (photos) => {
+
+  photos.forEach((item) => {
     const clone = template.cloneNode(true);
     clone.querySelector('img').src = item.url;
     clone.querySelector('img').alt = item.description;
