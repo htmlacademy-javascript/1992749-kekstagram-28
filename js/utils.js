@@ -1,4 +1,4 @@
-const getRandomNum = (min, max) => {
+export const getRandomNum = (min, max) => {
   if (min < 0 || max < 0) {
     throw new Error('Укажите положительный диапазон');
   }
@@ -11,7 +11,7 @@ const getRandomNum = (min, max) => {
 };
 
 
-const getRandomNumberUnique = (min, max) => {
+export const getRandomNumberUnique = (min, max) => {
   const uniqueNumbers = [];
 
   return function () {
@@ -27,6 +27,3 @@ const getRandomNumberUnique = (min, max) => {
     return swap;
   };
 };
-
-export {getRandomNum};
-export {getRandomNumberUnique};

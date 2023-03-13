@@ -60,11 +60,15 @@ const namesList = ['Tyrion Lannister',
   'Tormund Giantdeath',
 ];
 
+const numberOfPhotosRequired = 25;
+
+const uniqueIdentifiers = getRandomNumberUnique(400, 900);
+
 const createComments = (numberOfComment) => {
   const arr = [];
   for (let i = 1; i <= numberOfComment; i++) {
     const comment = {
-      id: `${getRandomNumberUnique(40, 900)}`,
+      id: `${uniqueIdentifiers()}`,
       avatar: `img/avatar-${getRandomNum(1, 6)}.svg`,
       message: `${messagesList[getRandomNum(0, 5)]}`,
       name: `${namesList[getRandomNum(0, 19)]}`,
@@ -74,9 +78,9 @@ const createComments = (numberOfComment) => {
   return arr;
 };
 
-const createPhotos = (numberOfPhotos) => {
+export const createPhotos = () => {
   const arr = [];
-  for (let i = 1; i <= numberOfPhotos; i++) {
+  for (let i = 1; i <= numberOfPhotosRequired; i++) {
     const photo = {
       id : `${i}`,
       url : `photos/${i}.jpg`,
@@ -88,4 +92,4 @@ const createPhotos = (numberOfPhotos) => {
   }
   return arr;
 };
-export {createPhotos};
+
