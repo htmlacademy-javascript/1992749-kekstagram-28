@@ -1,6 +1,6 @@
 import {getRandomNum, getRandomNumberUnique} from './utils.js';
 
-const descriptionsList = [
+const DESCRIPTIONS_LIST = [
   'zero',
   'one',
   'two',
@@ -29,7 +29,7 @@ const descriptionsList = [
   'twenty-five',
 ];
 
-const messagesList = [
+const MESSAGES_LIST = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -38,7 +38,7 @@ const messagesList = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const namesList = ['Tyrion Lannister',
+const NAMES_LIST = ['Tyrion Lannister',
   'Jon Snow',
   'Daenerys Targaryen',
   'Cersei Lannister',
@@ -60,18 +60,18 @@ const namesList = ['Tyrion Lannister',
   'Tormund Giantdeath',
 ];
 
-const numberOfPhotosRequired = 25;
+const PHOTOS_COUNT = 25;
 
-const uniqueIdentifiers = getRandomNumberUnique(400, 900);
+const UNIQUES_ID = getRandomNumberUnique(400, 900);
 
 const createComments = (numberOfComment) => {
   const arr = [];
   for (let i = 1; i <= numberOfComment; i++) {
     const comment = {
-      id: `${uniqueIdentifiers()}`,
+      id: `${UNIQUES_ID()}`,
       avatar: `img/avatar-${getRandomNum(1, 6)}.svg`,
-      message: `${messagesList[getRandomNum(0, 5)]}`,
-      name: `${namesList[getRandomNum(0, 19)]}`,
+      message: `${MESSAGES_LIST[getRandomNum(0, 5)]}`,
+      name: `${NAMES_LIST[getRandomNum(0, 19)]}`,
     };
     arr.push(comment);
   }
@@ -80,11 +80,11 @@ const createComments = (numberOfComment) => {
 
 export const createPhotos = () => {
   const arr = [];
-  for (let i = 1; i <= numberOfPhotosRequired; i++) {
+  for (let i = 1; i <= PHOTOS_COUNT; i++) {
     const photo = {
       id : `${i}`,
       url : `photos/${i}.jpg`,
-      description : `${descriptionsList[i]}`,
+      description : `${DESCRIPTIONS_LIST[i]}`,
       likes : `${getRandomNum(15, 200)}`,
       commens : createComments(2),
     };
