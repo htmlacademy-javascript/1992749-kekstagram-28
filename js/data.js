@@ -1,5 +1,7 @@
 import {getRandomNum, getRandomNumberUnique} from './utils.js';
 
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
 const DESCRIPTIONS_LIST = [
   'zero',
   'one',

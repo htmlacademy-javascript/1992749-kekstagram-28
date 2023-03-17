@@ -1,4 +1,4 @@
-
+import {showBigPicture} from './big-picture.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
@@ -13,6 +13,10 @@ export const createUsersImages = (photos) => {
     clone.querySelector('img').alt = item.description;
     clone.querySelector('.picture__likes').textContent = item.likes;
     clone.querySelector('.picture__comments').textContent = item.commens.length;
+
+    clone.addEventListener('click', () => {
+      showBigPicture(item);
+    });
     fragment.append(clone);
   });
   picturesContainer.append(fragment);
