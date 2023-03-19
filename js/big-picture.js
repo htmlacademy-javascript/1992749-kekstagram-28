@@ -9,7 +9,7 @@ const commentsCount = document.querySelector('.comments-count');
 const socialCaption = document.querySelector('.social__caption');
 const commentsCounterBlock = document.querySelector('.social__comment-count');
 const blockOfNewComments = document.querySelector('.comments-loader');
-
+const closeButton = document.querySelector('.big-picture__cancel');
 const socialCommentsList = document.querySelector('.social__comments');
 const socialCommentTemplate = document.querySelector('.social__comment');
 const fragment = document.createDocumentFragment();
@@ -23,7 +23,7 @@ const onDocumentKeydown = (evt) => {
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
-const closeButton = document.querySelector('.big-picture__cancel');
+
 closeButton.addEventListener('click', () => {
   fullScreenImage.classList.add('hidden');
   body.classList.remove('modal-open');
