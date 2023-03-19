@@ -12,7 +12,7 @@ export const createUsersImages = (photos) => {
     clone.querySelector('img').src = item.url;
     clone.querySelector('img').alt = item.description;
     clone.querySelector('.picture__likes').textContent = item.likes;
-    clone.querySelector('.picture__comments').textContent = item.commens.length;
+    clone.querySelector('.picture__comments').textContent = item.comments.length;
 
     clone.addEventListener('click', () => {
       showBigPicture(item);
@@ -21,4 +21,5 @@ export const createUsersImages = (photos) => {
   });
   picturesContainer.append(fragment);
 };
+
 
