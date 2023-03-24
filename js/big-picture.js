@@ -31,49 +31,35 @@ closeButton.addEventListener('click', () => {
 }
 );
 
-const getComments = (sample) => {
-  let commentsOpen = 0;
-  commentsOpen = PART_COMMENTS;
-
-  if (commentsOpen >= sample.comments.length) {
+const renderCommentsToList = (remarks, remarksOpen) => {
+  if (remarksOpen >= remarks.comments.length) {
     commentsLoader.classList.add('hidden');
-    commentsOpen = sample.comments.length;
+    remarksOpen = remarks.comments.length;
   } else {
     commentsLoader.classList.remove('hidden');
   }
-
-  for (let i = 0; i < commentsOpen; i++) {
+  for (let i = 0; i < remarksOpen; i++) {
     const clone = socialCommentTemplate.cloneNode(true);
-    clone.querySelector('.social__comment img').src = sample.comments[i].avatar;
-    clone.querySelector('.social__comment img').alt = sample.comments[i].name;
-    clone.querySelector('.social__comment p').textContent = sample.comments[i].message;
+    clone.querySelector('.social__comment img').src = remarks.comments[i].avatar;
+    clone.querySelector('.social__comment img').alt = remarks.comments[i].name;
+    clone.querySelector('.social__comment p').textContent = remarks.comments[i].message;
     fragment.append(clone);
   }
+  socialСommentСount.textContent = `${remarksOpen} из ${remarks.comments.length} комментариев`;
+  return fragment;
+};
+
+const renderComments = (photo) => {
+  let commentsOpen = PART_COMMENTS;
+  renderCommentsToList(photo, commentsOpen);
 
   commentsLoader.addEventListener('click', () => {
     commentsOpen += PART_COMMENTS;
     socialCommentsList.innerHTML = '';
-
-    if (commentsOpen >= sample.comments.length) {
-      commentsLoader.classList.add('hidden');
-      commentsOpen = sample.comments.length;
-    } else {
-      commentsLoader.classList.remove('hidden');
-    }
-
-    for (let i = 0; i < commentsOpen; i++) {
-      const clone = socialCommentTemplate.cloneNode(true);
-      clone.querySelector('.social__comment img').src = sample.comments[i].avatar;
-      clone.querySelector('.social__comment img').alt = sample.comments[i].name;
-      clone.querySelector('.social__comment p').textContent = sample.comments[i].message;
-      fragment.append(clone);
-    }
+    renderCommentsToList(photo, commentsOpen);
     socialCommentsList.append(fragment);
-    socialСommentСount.textContent = `${commentsOpen} из ${sample.comments.length} комментариев`;
   }
   );
-  socialСommentСount.textContent = `${commentsOpen} из ${sample.comments.length} комментариев`;
-
 };
 
 export const showBigPicture = (photo) => {
@@ -85,8 +71,8 @@ export const showBigPicture = (photo) => {
   body.classList.add('modal-open');
 
   socialCommentsList.innerHTML = '';
-
-  getComments(photo);
+  renderComments(photo);
   socialCommentsList.append(fragment);
   document.addEventListener('keydown', onDocumentKeydown);
 };
+
