@@ -22,7 +22,7 @@ const checkCommentEscape = (evt) => {
   }
 };
 
-const assistsСlosing = () => {
+const closeModalWindow = () => {
   form.reset();
   modalWindow.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -32,13 +32,13 @@ const assistsСlosing = () => {
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    assistsСlosing();
+    closeModalWindow();
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
-const closeModalWindow = () => {
+const onCloseButtonClick = () => {
   pristine.reset();
-  assistsСlosing();
+  closeModalWindow();
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
@@ -76,7 +76,7 @@ const initValidation = () => {
 
 export const initModal = () => {
   fileField.addEventListener('change', openModalWindow);
-  closeButton.addEventListener('click', closeModalWindow);
+  closeButton.addEventListener('click', onCloseButtonClick);
   initValidation();
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
