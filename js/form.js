@@ -1,4 +1,8 @@
 import { isEscapeKey } from './data.js';
+import { dinitScale } from './scale.js';
+import { deInitEffects } from './effects.js';
+import { resetScaleImage } from './scale.js';
+import { resetEffect } from './effects.js';
 const body = document.querySelector('body');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const fileField = document.querySelector('#upload-file');
@@ -23,6 +27,8 @@ const checkCommentEscape = (evt) => {
 };
 
 const closeModalWindow = () => {
+  dinitScale();
+  deInitEffects();
   form.reset();
   modalWindow.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -43,6 +49,8 @@ const onCloseButtonClick = () => {
 };
 
 const openModalWindow = () => {
+  resetScaleImage();
+  resetEffect();
   modalWindow.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
