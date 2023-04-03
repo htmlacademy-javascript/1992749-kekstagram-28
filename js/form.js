@@ -1,4 +1,8 @@
 import { isEscapeKey } from './data.js';
+import { deinitScale } from './scale.js';
+import { deInitEffects } from './effects.js';
+import { resetScaleImage } from './scale.js';
+import { resetEffect } from './effects.js';
 const body = document.querySelector('body');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const fileField = document.querySelector('#upload-file');
@@ -22,7 +26,9 @@ const checkCommentEscape = (evt) => {
   }
 };
 
-const assistsСlosing = () => {
+const closeModalWindow = () => {
+  deinitScale();
+  deInitEffects();
   form.reset();
   modalWindow.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -32,17 +38,19 @@ const assistsСlosing = () => {
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    assistsСlosing();
+    closeModalWindow();
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
-const closeModalWindow = () => {
+const onCloseButtonClick = () => {
   pristine.reset();
-  assistsСlosing();
+  closeModalWindow();
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const openModalWindow = () => {
+  resetScaleImage();
+  resetEffect();
   modalWindow.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
@@ -76,7 +84,7 @@ const initValidation = () => {
 
 export const initModal = () => {
   fileField.addEventListener('change', openModalWindow);
-  closeButton.addEventListener('click', closeModalWindow);
+  closeButton.addEventListener('click', onCloseButtonClick);
   initValidation();
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
