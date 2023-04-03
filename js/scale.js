@@ -13,7 +13,7 @@ const changeScaleImage = (value) => {
   scaleControlValue.value = `${value}%`;
 };
 
-const clickButtonSmaller = () => {
+const increaseSize = () => {
   const currentValue = parseInt(scaleControlValue.value, 10);
   let newValue = currentValue - STEP_SCALE;
   if (newValue < MIN_SCALE) {
@@ -22,7 +22,7 @@ const clickButtonSmaller = () => {
   changeScaleImage(newValue);
 };
 
-const clickButtonBigger = () => {
+const decreaseSize = () => {
   const currentValue = parseInt(scaleControlValue.value, 10);
   let newValue = currentValue + STEP_SCALE;
   if (newValue > MAX_SCALE) {
@@ -32,13 +32,13 @@ const clickButtonBigger = () => {
 };
 
 const initScale = () => {
-  buttonScaleControlSmaller.addEventListener('click', clickButtonSmaller);
-  buttonScaleControlBigger.addEventListener('click', clickButtonBigger);
+  buttonScaleControlSmaller.addEventListener('click', increaseSize);
+  buttonScaleControlBigger.addEventListener('click', decreaseSize);
 };
 
-export const dinitScale = () => {
-  buttonScaleControlSmaller.removeEventListener('click', clickButtonSmaller);
-  buttonScaleControlBigger.removeEventListener('click', clickButtonBigger);
+export const deinitScale = () => {
+  buttonScaleControlSmaller.removeEventListener('click', increaseSize);
+  buttonScaleControlBigger.removeEventListener('click', decreaseSize);
 };
 
 export const resetScaleImage = () => {

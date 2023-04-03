@@ -56,6 +56,16 @@ const slider = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const fieldEffectValue = document.querySelector('.effect-level__value');
 
+noUiSlider.create(slider, {
+  range: {
+    min: EFFECT_DEFAULT.min,
+    max: EFFECT_DEFAULT.max,
+  },
+  start: EFFECT_DEFAULT.max,
+  step: EFFECT_DEFAULT.step,
+  connect: 'lower',
+});
+
 const showSlider = () => {
   sliderContainer.classList.remove('hidden');
 };
@@ -98,26 +108,11 @@ const changeSlider = () => {
   fieldEffectValue.value = sliderValue;
 };
 
-// const resetEffect = () => {
-//   currentEffect = EFFECT_DEFAULT;
-//   updateSlider();
-// };
-
-noUiSlider.create(slider, {
-  range: {
-    min: EFFECT_DEFAULT.min,
-    max: EFFECT_DEFAULT.max,
-  },
-  start: EFFECT_DEFAULT.max,
-  step: EFFECT_DEFAULT.step,
-  connect: 'lower',
-});
-//hideSlider();
 const initEffects = () => {
   fieldEffects.addEventListener('change', changeEffect);
   slider.noUiSlider.on('update', changeSlider);
 };
-//initEffects();
+
 export const deInitEffects = () => {
   fieldEffects.removeEventListener('change', changeEffect);
 };
@@ -127,6 +122,4 @@ export const resetEffect = () => {
   updateSlider();
   initEffects();
 };
-//export {resetEffect};
-
 

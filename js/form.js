@@ -1,5 +1,5 @@
 import { isEscapeKey } from './data.js';
-import { dinitScale } from './scale.js';
+import { deinitScale } from './scale.js';
 import { deInitEffects } from './effects.js';
 import { resetScaleImage } from './scale.js';
 import { resetEffect } from './effects.js';
@@ -27,7 +27,7 @@ const checkCommentEscape = (evt) => {
 };
 
 const closeModalWindow = () => {
-  dinitScale();
+  deinitScale();
   deInitEffects();
   form.reset();
   modalWindow.classList.add('hidden');
