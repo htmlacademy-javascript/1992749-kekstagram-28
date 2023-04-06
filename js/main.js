@@ -1,7 +1,16 @@
-import {createPhotos} from './data.js';
-import {createUsersImages} from './pictures.js';
-import {initModal} from './form.js';
+import { createUsersImages } from './pictures.js';
+import { initModal } from './form.js';
+import { getData } from './api.js';
+import { showAlert } from './utils.js';
 
-const generatedPhotos = createPhotos();
-createUsersImages(generatedPhotos);
 initModal();
+
+getData()
+  .then((data) => {
+    createUsersImages(data);
+  })
+  .catch(
+    (err) => {
+      showAlert(err.message);
+    }
+  );
