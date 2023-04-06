@@ -3,6 +3,8 @@ import { deinitScale } from './scale.js';
 import { deInitEffects } from './effects.js';
 import { resetScaleImage } from './scale.js';
 import { resetEffect } from './effects.js';
+import { showAlert } from './utils.js';
+import { sendData } from './api.js';
 const body = document.querySelector('body');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const fileField = document.querySelector('#upload-file');
@@ -13,6 +15,11 @@ const PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const TAG_ERROR = 'Невалидный хэш-тег';
 const hashtagsInputField = document.querySelector('.text__hashtags');
 const commentInputField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -82,13 +89,40 @@ const initValidation = () => {
   );
 };
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch(
+          (err) => {
+            showAlert(err.message);
+          }
+        )
+        .finally(unblockSubmitButton);
+
+      closeModalWindow();
+    }
+  });
+};
+
 export const initModal = () => {
   fileField.addEventListener('change', openModalWindow);
   closeButton.addEventListener('click', onCloseButtonClick);
   initValidation();
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
-  });
+  setUserFormSubmit();
 };
-
