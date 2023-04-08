@@ -7,6 +7,8 @@ const template = document.querySelector('#picture').content.querySelector('a');
 
 export const createUsersImages = (photos) => {
 
+  picturesContainer.querySelectorAll('.picture').forEach((element) => element.remove());
+
   photos.forEach((item) => {
     const clone = template.cloneNode(true);
     clone.querySelector('img').src = item.url;

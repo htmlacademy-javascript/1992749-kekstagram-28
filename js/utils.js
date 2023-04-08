@@ -11,6 +11,15 @@ export const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+export const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export const getRandomNum = (min, max) => {
   if (min < 0 || max < 0) {
     throw new Error('Укажите положительный диапазон');
