@@ -20,6 +20,13 @@ const SubmitButtonText = {
   IDLE: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
+const preview = document.querySelector('.img-upload__preview img');
+const fileChooser = document.querySelector('.img-upload__input');
+
+const getFile = () => {
+  const file = fileChooser.files[0];
+  preview.src = URL.createObjectURL(file);
+};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -41,6 +48,7 @@ const closeModalWindow = () => {
   body.classList.remove('modal-open');
   hashtagsInputField.removeEventListener('keydown', checkCommentEscape);
   commentInputField.removeEventListener('keydown', checkCommentEscape);
+  fileChooser.removeEventListener('change', getFile);
 };
 
 const onDocumentKeydown = (evt) => {
@@ -121,6 +129,7 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 export const initModal = () => {
+  fileChooser.addEventListener('change', getFile);
   fileField.addEventListener('change', openModalWindow);
   closeButton.addEventListener('click', onCloseButtonClick);
   initValidation();
