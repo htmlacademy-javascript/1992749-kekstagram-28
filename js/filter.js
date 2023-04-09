@@ -12,7 +12,7 @@ let pictures = [];
 const sortRandom = () => Math.random() - 0.5;
 const sortDiscussed = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
 
-export const getFilter = () => {
+export const getFilteredImages = () => {
   switch(currentFilter) {
     case Filter.RANDOM:
       return [...pictures].sort(sortRandom).slice(0,FILTER_PICTURES_COUNT);
@@ -23,7 +23,7 @@ export const getFilter = () => {
   }
 };
 
-const runFilterClick = (callback) => {
+const initFilterClick = (callback) => {
   filterBlock.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains('img-filters__button')) {
       return;
@@ -34,13 +34,13 @@ const runFilterClick = (callback) => {
     filterBlock.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     currentFilter = evt.target.id;
-    callback(getFilter());
+    callback(getFilteredImages());
   });
 };
 
 export const initFilter = (data, callback) => {
   filterBlock.classList.remove('img-filters--inactive');
   pictures = [...data];
-  runFilterClick(callback);
+  initFilterClick(callback);
 };
 
