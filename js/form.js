@@ -5,6 +5,7 @@ import { resetScaleImage } from './scale.js';
 import { resetEffect } from './effects.js';
 import { showAlert } from './utils.js';
 import { sendData } from './api.js';
+import { showErrorMessage } from './message.js';
 const body = document.querySelector('body');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const fileField = document.querySelector('#upload-file');
@@ -119,6 +120,7 @@ const setUserFormSubmit = (onSuccess) => {
         .catch(
           (err) => {
             showAlert(err.message);
+            showErrorMessage();
           }
         )
         .finally(unblockSubmitButton);
