@@ -1,6 +1,6 @@
 
-import { isEscapeKey } from './data.js';
-
+import { isEscapeKey } from './utils.js';
+const PART_COMMENTS = 5;
 const fullScreenImage = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture__img img');
@@ -12,8 +12,9 @@ const commentsLoader = document.querySelector('.comments-loader');
 const closeButton = document.querySelector('.big-picture__cancel');
 const socialCommentsList = document.querySelector('.social__comments');
 const socialCommentTemplate = document.querySelector('.social__comment');
+
 const fragment = document.createDocumentFragment();
-const PART_COMMENTS = 5;
+
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -23,13 +24,6 @@ const onDocumentKeydown = (evt) => {
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
-
-closeButton.addEventListener('click', () => {
-  fullScreenImage.classList.add('hidden');
-  body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
-}
-);
 
 const renderCommentsToList = (remarks, remarksOpen) => {
   if (remarksOpen >= remarks.comments.length) {
@@ -63,6 +57,12 @@ const renderComments = (photo) => {
 };
 
 export const showBigPicture = (photo) => {
+  closeButton.addEventListener('click', () => {
+    fullScreenImage.classList.add('hidden');
+    body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onDocumentKeydown);
+  }
+  );
   fullScreenImage.classList.remove('hidden');
   bigPicture.src = photo.url;
   likesCount.textContent = photo.likes;

@@ -1,9 +1,8 @@
 import {showBigPicture} from './big-picture.js';
-
 const picturesContainer = document.querySelector('.pictures');
-const fragment = document.createDocumentFragment();
 const template = document.querySelector('#picture').content.querySelector('a');
 
+const fragment = document.createDocumentFragment();
 
 export const createUsersImages = (photos) => {
 

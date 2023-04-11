@@ -4,7 +4,6 @@ const Filter = {
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed'
 };
-
 const filterBlock = document.querySelector('.img-filters');
 let currentFilter = Filter.DEFAULT;
 let pictures = [];
