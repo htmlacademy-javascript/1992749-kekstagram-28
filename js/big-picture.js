@@ -25,13 +25,6 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-closeButton.addEventListener('click', () => {
-  fullScreenImage.classList.add('hidden');
-  body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
-}
-);
-
 const renderCommentsToList = (remarks, remarksOpen) => {
   if (remarksOpen >= remarks.comments.length) {
     commentsLoader.classList.add('hidden');
@@ -64,6 +57,12 @@ const renderComments = (photo) => {
 };
 
 export const showBigPicture = (photo) => {
+  closeButton.addEventListener('click', () => {
+    fullScreenImage.classList.add('hidden');
+    body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onDocumentKeydown);
+  }
+  );
   fullScreenImage.classList.remove('hidden');
   bigPicture.src = photo.url;
   likesCount.textContent = photo.likes;
