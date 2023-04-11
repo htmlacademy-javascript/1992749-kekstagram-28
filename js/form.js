@@ -1,4 +1,4 @@
-import { isEscapeKey } from './data.js';
+import { isEscapeKey } from './utils.js';
 import { deinitScale } from './scale.js';
 import { deInitEffects } from './effects.js';
 import { resetScaleImage } from './scale.js';
@@ -6,14 +6,14 @@ import { resetEffect } from './effects.js';
 import { showAlert } from './utils.js';
 import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
+const MAX_TAG_COUNT = 5;
+const PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
+const TAG_ERROR = 'Невалидный хэш-тег';
 const body = document.querySelector('body');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const fileField = document.querySelector('#upload-file');
 const closeButton = document.querySelector('#upload-cancel');
 const form = document.querySelector('.img-upload__form');
-const MAX_TAG_COUNT = 5;
-const PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
-const TAG_ERROR = 'Невалидный хэш-тег';
 const hashtagsInputField = document.querySelector('.text__hashtags');
 const commentInputField = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
@@ -24,16 +24,16 @@ const SubmitButtonText = {
 const preview = document.querySelector('.img-upload__preview img');
 const fileChooser = document.querySelector('.img-upload__input');
 
-const getFile = () => {
-  const file = fileChooser.files[0];
-  preview.src = URL.createObjectURL(file);
-};
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper__error-text',
 });
+
+const getFile = () => {
+  const file = fileChooser.files[0];
+  preview.src = URL.createObjectURL(file);
+};
 
 const checkCommentEscape = (evt) => {
   if (isEscapeKey(evt)) {
@@ -58,6 +58,7 @@ const onDocumentKeydown = (evt) => {
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
+
 const onCloseButtonClick = () => {
   pristine.reset();
   closeModalWindow();

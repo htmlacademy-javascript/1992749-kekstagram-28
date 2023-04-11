@@ -1,6 +1,6 @@
 
-import { isEscapeKey } from './data.js';
-
+import { isEscapeKey } from './utils.js';
+const PART_COMMENTS = 5;
 const fullScreenImage = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture__img img');
@@ -12,8 +12,9 @@ const commentsLoader = document.querySelector('.comments-loader');
 const closeButton = document.querySelector('.big-picture__cancel');
 const socialCommentsList = document.querySelector('.social__comments');
 const socialCommentTemplate = document.querySelector('.social__comment');
+
 const fragment = document.createDocumentFragment();
-const PART_COMMENTS = 5;
+
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
