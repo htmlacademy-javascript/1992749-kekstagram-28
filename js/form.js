@@ -42,14 +42,16 @@ const checkCommentEscape = (evt) => {
 };
 
 const closeModalWindow = () => {
-  deinitScale();
-  deInitEffects();
-  form.reset();
-  modalWindow.classList.add('hidden');
-  body.classList.remove('modal-open');
-  hashtagsInputField.removeEventListener('keydown', checkCommentEscape);
-  commentInputField.removeEventListener('keydown', checkCommentEscape);
-  fileChooser.removeEventListener('change', getFile);
+  if (!document.querySelector('.error')) {
+    deinitScale();
+    deInitEffects();
+    form.reset();
+    modalWindow.classList.add('hidden');
+    body.classList.remove('modal-open');
+    hashtagsInputField.removeEventListener('keydown', checkCommentEscape);
+    commentInputField.removeEventListener('keydown', checkCommentEscape);
+    fileChooser.removeEventListener('change', getFile);
+  }
 };
 
 const onDocumentKeydown = (evt) => {
@@ -109,7 +111,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = () => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -117,7 +119,10 @@ const setUserFormSubmit = (onSuccess) => {
     if (isValid) {
       blockSubmitButton();
       sendData(new FormData(evt.target))
-        .then(onSuccess)
+        .then(() => {
+          closeModalWindow();
+          showSuccessMessage();
+        })
         .catch(
           (err) => {
             showAlert(err.message);
@@ -125,8 +130,6 @@ const setUserFormSubmit = (onSuccess) => {
           }
         )
         .finally(unblockSubmitButton);
-
-      closeModalWindow();
     }
   });
 };
@@ -136,5 +139,5 @@ export const initModal = () => {
   fileField.addEventListener('change', openModalWindow);
   closeButton.addEventListener('click', onCloseButtonClick);
   initValidation();
-  setUserFormSubmit(showSuccessMessage);
+  setUserFormSubmit();
 };
