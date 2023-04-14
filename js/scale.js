@@ -15,19 +15,13 @@ const changeScaleImage = (value) => {
 
 const decreaseSize = () => {
   const currentValue = parseInt(scaleControlValue.value, 10);
-  let newValue = currentValue - STEP_SCALE;
-  if (newValue < MIN_SCALE) {
-    newValue = MIN_SCALE;
-  }
+  const newValue = (currentValue - STEP_SCALE) < MIN_SCALE ? MIN_SCALE : currentValue - STEP_SCALE;
   changeScaleImage(newValue);
 };
 
 const increaseSize = () => {
   const currentValue = parseInt(scaleControlValue.value, 10);
-  let newValue = currentValue + STEP_SCALE;
-  if (newValue > MAX_SCALE) {
-    newValue = MAX_SCALE;
-  }
+  const newValue = (currentValue + STEP_SCALE) > MAX_SCALE ? MAX_SCALE : currentValue + STEP_SCALE;
   changeScaleImage(newValue);
 };
 
